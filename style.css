@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+    text-align: center;
+}
+
+.dark {
+    background: #0a0a0a;
+    color: white;
+}
+
+.light {
+    background: white;
+    color: black;
+}
+
+header {
+    padding: 20px;
+    position: relative;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+}
+
+#theme-toggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn {
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Couleurs des boutons */
+.twitch { background: #9146FF; }
+.youtube { background: #FF0000; }
+.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.tiktok { background: linear-gradient(45deg, #25F4EE, #FE2C55); }
+.discord { background: #5865F2; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .links {
+        width: 90%;
+    }
+}
