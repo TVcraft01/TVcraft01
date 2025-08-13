@@ -1,75 +1,106 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    transition: background 0.3s, color 0.3s;
+    background: url('etoiles.gif') repeat;
+    background-size: cover;
+    color: white;
     text-align: center;
 }
 
-.dark {
-    background: #0a0a0a;
-    color: white;
-}
-
-.light {
-    background: white;
-    color: black;
-}
-
 header {
-    padding: 20px;
-    position: relative;
+    margin-top: 40px;
 }
 
 .logo {
-    width: 100px;
-    height: auto;
+    width: 120px;
     border-radius: 50%;
+    border: 3px solid cyan;
+    box-shadow: 0 0 15px cyan;
 }
 
-#theme-toggle {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+h1 {
+    font-size: 2.5em;
+    margin: 10px 0;
+    text-shadow: 0 0 10px violet;
+}
+
+p {
     font-size: 1.2em;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: inherit;
 }
 
-.links {
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.social {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.btn {
-    padding: 15px;
-    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     color: white;
-    font-size: 1.2em;
     text-decoration: none;
     font-weight: bold;
-    transition: transform 0.2s, background 0.3s;
+    font-size: 1.1em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn:hover {
+.social:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 25px white;
 }
 
-/* Couleurs des boutons */
+.count {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+/* Couleurs des réseaux */
 .twitch { background: #9146FF; }
 .youtube { background: #FF0000; }
-.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .tiktok { background: linear-gradient(45deg, #25F4EE, #FE2C55); }
+.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .discord { background: #5865F2; }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .links {
-        width: 90%;
-    }
+/* Menu hamburger */
+.menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#menu-content {
+    display: none;
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: white;
+    min-width: 150px;
+}
+
+#menu-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-content li {
+    padding: 5px 0;
 }
