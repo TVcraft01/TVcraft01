@@ -34,7 +34,7 @@ async function getTwitchFollowers() {
 
 // -------- YOUTUBE --------
 const youtubeApiKey = "AIzaSyCjBltbjrz24kJ7yTQhezCyDNjHE45pGbY";
-const youtubeChannelId = "UCXXXXX"; // Remplace par ton vrai ID chaîne
+const youtubeChannelId = "@TVcraft01"; // Remplace par ton vrai ID chaîne
 
 async function getYouTubeSubscribers() {
     const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${youtubeChannelId}&key=${youtubeApiKey}`);
@@ -44,10 +44,11 @@ async function getYouTubeSubscribers() {
 }
 
 // -------- AUTRES (valeurs fixes pour TikTok, Instagram, Discord) --------
-document.getElementById("tiktok-count").textContent = "1 200";
-document.getElementById("instagram-count").textContent = "980";
-document.getElementById("discord-count").textContent = "54";
+document.getElementById("tiktok-count").textContent = "24";
+document.getElementById("instagram-count").textContent = "31";
+document.getElementById("discord-count").textContent = "3";
 
 // Lancer les compteurs
 getTwitchFollowers();
 getYouTubeSubscribers();
+
