@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TVcraft01 - Mes réseaux</title>
+    <title>TVcraft01 - Mes Réseaux</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
-<body class="dark">
+<body>
+    <div class="menu">
+        <button id="menu-toggle">⋮</button>
+        <div id="menu-content">
+            <h3>Mes projets</h3>
+            <ul>
+                <li>Projet 1</li>
+                <li>Projet 2</li>
+                <li>Projet 3</li>
+            </ul>
+        </div>
+    </div>
+
     <header>
-        <img src="https://i.postimg.cc/Tw9jJqDQ/zelkfjgzpeza.png" alt="TVcraft01" class="logo">
+        <img src="logo.png" alt="Logo TVcraft01" class="logo">
         <h1>TVcraft01</h1>
-        <button id="theme-toggle">🌙</button>
+        <p>TVs never sleep 📺</p>
     </header>
 
     <main>
-        <p>Retrouve-moi sur mes réseaux 👇</p>
-        <div class="links">
-            <a href="https://www.twitch.tv/tvcraft01" target="_blank" class="btn twitch">Twitch</a>
-            <a href="https://www.youtube.com/@tvcraft01" target="_blank" class="btn youtube">YouTube</a>
-            <a href="https://www.instagram.com/tvcraft01" target="_blank" class="btn instagram">Instagram</a>
-            <a href="https://www.tiktok.com/@tvcraft01" target="_blank" class="btn tiktok">TikTok</a>
-            <a href="https://discord.gg/ton-lien" target="_blank" class="btn discord">Discord</a>
+        <div class="socials">
+            <a class="social twitch" href="https://www.twitch.tv/tvcraft01" target="_blank">
+                <span class="count" id="twitch-count">0</span>
+                Twitch
+            </a>
+            <a class="social youtube" href="https://www.youtube.com/@tvcraft01" target="_blank">
+                <span class="count" id="youtube-count">0</span>
+                YouTube
+            </a>
+            <a class="social tiktok" href="https://www.tiktok.com/@tvcraft01" target="_blank">
+                <span class="count" id="tiktok-count">0</span>
+                TikTok
+            </a>
+            <a class="social instagram" href="https://www.instagram.com/tvcraft01" target="_blank">
+                <span class="count" id="instagram-count">0</span>
+                Instagram
+            </a>
+            <a class="social discord" href="https://discord.gg/ton-lien" target="_blank">
+                <span class="count" id="discord-count">0</span>
+                Discord
+            </a>
         </div>
     </main>
-
-    <footer>
-        <p>&copy; 2025 TVcraft01 - Tous droits réservés</p>
-    </footer>
 </body>
 </html>
-
-
-
-
