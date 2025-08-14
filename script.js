@@ -1,55 +1,36 @@
-// -------- MENU --------
-document.getElementById("menu-toggle").addEventListener("click", () => {
-    const menu = document.getElementById("menu-content");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-});
+function toggleProjects() {
+    const menu = document.getElementById('projects');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
 
-// -------- TWITCH --------
-const twitchClientId = "qs6zxkor0xf0ngl10hwq5lbh4l6zaf";
-const twitchUsername = "tvcraft01";
-
+// --- Compteur Twitch ---
 async function getTwitchFollowers() {
-    const tokenRes = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${twitchClientId}&client_secret=&grant_type=client_credentials`, {
-        method: "POST"
-    });
-    const tokenData = await tokenRes.json();
-    const res = await fetch(`https://api.twitch.tv/helix/users?login=${twitchUsername}`, {
-        headers: {
-            "Client-ID": twitchClientId,
-            "Authorization": `Bearer ${tokenData.access_token}`
-        }
-    });
-    const userData = await res.json();
-    const userId = userData.data[0].id;
+    const clientId = "qs6zxkor0xf0ngl10hwq5lbh4l6zaf";
+    const accessToken = "TON_TOKEN_TWITCH_ICI"; // À générer gratuitement sur https://twitchtokengenerator.com/
+    const userName = "tvcraft01";
 
-    const followersRes = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${userId}`, {
-        headers: {
-            "Client-ID": twitchClientId,
-            "Authorization": `Bearer ${tokenData.access_token}`
-        }
+    let userRes = await fetch(`https://api.twitch.tv/helix/users?login=${userName}`, {
+        headers: { "Client-ID": clientId, "Authorization": `Bearer ${accessToken}` }
     });
-    const followersData = await followersRes.json();
-    document.getElementById("twitch-count").textContent = followersData.total.toLocaleString();
+    let userData = await userRes.json();
+    let userId = userData.data[0].id;
+
+    let followersRes = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${userId}`, {
+        headers: { "Client-ID": clientId, "Authorization": `Bearer ${accessToken}` }
+    });
+    let followersData = await followersRes.json();
+    document.getElementById("twitch-count").innerText = followersData.total;
 }
 
-// -------- YOUTUBE --------
-const youtubeApiKey = "AIzaSyCjBltbjrz24kJ7yTQhezCyDNjHE45pGbY";
-const youtubeChannelId = "TVcraft01"; // Remplace par ton vrai ID chaîne
-
+// --- Compteur YouTube ---
 async function getYouTubeSubscribers() {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${youtubeChannelId}&key=${youtubeApiKey}`);
-    const data = await res.json();
-    const subs = data.items[0].statistics.subscriberCount;
-    document.getElementById("youtube-count").textContent = parseInt(subs).toLocaleString();
+    const apiKey = "AIzaSyCjBltbjrz24kJ7yTQhezCyDNjHE45pGbY";
+    const channelId = "ID_DE_TA_CHAINE";
+    let res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`);
+    let data = await res.json();
+    document.getElementById("youtube-count").innerText = data.items[0].statistics.subscriberCount;
 }
 
-// -------- AUTRES (valeurs fixes pour TikTok, Instagram, Discord) --------
-document.getElementById("tiktok-count").textContent = "24";
-document.getElementById("instagram-count").textContent = "31";
-document.getElementById("discord-count").textContent = "3";
-
-// Lancer les compteurs
+// Lancer au chargement
 getTwitchFollowers();
 getYouTubeSubscribers();
-
-
