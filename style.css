@@ -1,106 +1,99 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url('etoiles.gif') repeat;
-    background-size: cover;
+    background: black;
     color: white;
+    overflow-x: hidden;
+}
+
+.background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.dots {
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+}
+.projects {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid cyan;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.projects a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+.projects a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.panel {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
+    background: rgba(20, 0, 40, 0.8);
+    border: 2px solid cyan;
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 20px cyan, 0 0 40px violet;
 }
 
-header {
-    margin-top: 40px;
-}
-
-.logo {
-    width: 120px;
-    border-radius: 50%;
-    border: 3px solid cyan;
-    box-shadow: 0 0 15px cyan;
-}
-
-h1 {
+.neon-text {
     font-size: 2.5em;
-    margin: 10px 0;
-    text-shadow: 0 0 10px violet;
-}
-
-p {
-    font-size: 1.2em;
+    color: cyan;
+    text-shadow: 0 0 5px cyan, 0 0 15px cyan, 0 0 30px violet;
 }
 
 .socials {
+    margin-top: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 15px;
-    margin-top: 30px;
 }
 
-.social {
+.social-btn {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    color: white;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.social:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px white;
-}
-
-.count {
-    font-size: 1.4em;
-    margin-bottom: 5px;
-}
-
-/* Couleurs des réseaux */
-.twitch { background: #9146FF; }
-.youtube { background: #FF0000; }
-.tiktok { background: linear-gradient(45deg, #25F4EE, #FE2C55); }
-.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.discord { background: #5865F2; }
-
-/* Menu hamburger */
-.menu {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-#menu-toggle {
-    font-size: 24px;
-    background: none;
-    border: none;
     color: white;
-    cursor: pointer;
+    border: 2px solid cyan;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    box-shadow: 0 0 10px cyan, 0 0 20px violet;
+    transition: transform 0.3s;
 }
-
-#menu-content {
-    display: none;
-    position: absolute;
-    background: rgba(0,0,0,0.8);
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-    color: white;
-    min-width: 150px;
+.social-btn:hover {
+    transform: scale(1.1);
 }
-
-#menu-content ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#menu-content li {
-    padding: 5px 0;
+.social-btn img {
+    width: 40px;
+    height: 40px;
 }
