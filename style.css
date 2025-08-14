@@ -1,190 +1,56 @@
-/* --------- Variables couleurs --------- */
-:root{
-  --bg: #0f0f10;
-  --panel: #2a2a2d;
-  --cyan: #00d1ff;
-  --violet: #8b3dff;
-  --white: #ffffff;
+body {
+    margin: 0;
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-/* --------- Reset léger --------- */
-*{ box-sizing: border-box; }
-html,body{ height:100%; }
-body{
-  margin:0;
-  background: var(--bg);
-  color: var(--white);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
-  overflow-x: hidden;
+.menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 28px;
+    cursor: pointer;
 }
 
-/* --------- Fond étoilé --------- */
-.sky{
-  position: fixed; inset: 0; z-index:-2;
-}
-.sky img{
-  width:100%; height:100%; object-fit: cover;
-  filter: brightness(0.9);
-}
-
-/* --------- Trait cyan oblique --------- */
-.diagonal-accent{
-  position: fixed; left:-10vw; right:-10vw;
-  top: 28vh; height: 7px; z-index:-1;
-  background: var(--cyan);
-  filter: drop-shadow(0 0 8px var(--cyan)) drop-shadow(0 0 18px var(--cyan));
-  transform: rotate(-6deg);
-  border-radius: 10px;
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
 }
 
-/* --------- Bouton menu (hex + 3 traits) --------- */
-.hamburger{
-  position: fixed; top: 16px; left: 16px; z-index: 5;
-  width: 58px; height: 64px; border: none; cursor: pointer;
-  background: #3d3d42;
-  color: var(--white);
-  clip-path: polygon(26% 0, 74% 0, 100% 50%, 74% 100%, 26% 100%, 0 50%);
-  display: grid; place-content: center; gap: 6px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.4), 0 0 10px rgba(255,255,255,.08) inset;
-}
-.hamburger span{
-  display:block; width:24px; height:3px; border-radius:3px;
-  background:#cfcfd2;
+.stars {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* --------- Drawer projets --------- */
-.drawer{
-  position: fixed; top:0; right:0; height:100%; width:min(92vw, 360px);
-  background:#1b1b1e; transform: translateX(105%);
-  transition: transform .3s ease; z-index: 10;
-  border-left: 1px solid rgba(255,255,255,.08);
-  box-shadow: -10px 0 30px rgba(0,0,0,.5);
-}
-.drawer.open{ transform: translateX(0); }
-.drawer-header{
-  display:flex; justify-content: space-between; align-items:center;
-  padding: 18px 16px; border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.drawer-header h3{ margin:0; font-weight:700; }
-.drawer-header button{
-  border:none; background:transparent; color:#ddd; font-size:20px; cursor:pointer;
-}
-.proj-list{ list-style:none; margin:0; padding: 8px 14px 20px; }
-.proj-list li{ margin:10px 0; }
-.proj-list a{
-  display:block; padding:12px 14px; border-radius:10px; text-decoration:none; color:#eaeaea;
-  background:#252528; border:1px solid rgba(255,255,255,.06);
-}
-.proj-list a:hover{ background:#2d2d31; }
-
-/* backdrop */
-.drawer-backdrop{
-  position: fixed; inset:0; background: rgba(0,0,0,.45);
-  opacity:0; pointer-events:none; transition: opacity .3s; z-index:9;
-}
-.drawer-backdrop.show{ opacity:1; pointer-events:auto; }
-
-/* --------- Section centrale --------- */
-.hero{
-  min-height:100svh;
-  display:grid; place-items:center;
-  padding: 14vh 16px 18vh;
+.card {
+    background-color: #222;
+    display: inline-block;
+    padding: 20px;
+    margin-top: 120px;
+    border-radius: 5px;
 }
 
-/* --------- Carte centrale --------- */
-.card{
-  position: relative;
-  background: var(--panel);
-  border-radius: 8px;
-  padding: 68px 20px 26px;
-  width: min(720px, 92vw);
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.05) inset,
-    0 10px 40px rgba(0,0,0,.6);
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
 }
 
-/* ailes latérales (comme sur ta capture) */
-.card .wing{
-  position:absolute; top:0; width:26%; height:100%;
-  background: var(--panel); z-index:-1;
-  box-shadow: 0 10px 40px rgba(0,0,0,.6);
-}
-.card .wing.left{ left:-26%; border-radius:8px 0 0 8px; }
-.card .wing.right{ right:-26%; border-radius:0 8px 8px 0; }
-
-/* encoche + logo au centre haut */
-.logo-notch{
-  position:absolute; left:50%; top:-34px; transform: translateX(-50%);
-  width: 140px; height: 110px;
-  background: var(--panel);
-  clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
-  display:grid; place-items:center;
-  filter: drop-shadow(0 0 14px rgba(139,61,255,.6));
-}
-.logo-notch img{
-  width:90px; height:auto; opacity:.92; mix-blend-mode: screen;
+.socials span {
+    font-size: 24px;
+    margin: 0 5px;
 }
 
-/* Titre + tagline avec glow néon violet/bleu */
-.title{
-  margin: 12px 0 6px;
-  font-size: clamp(26px, 4.2vw, 36px);
-  letter-spacing:.5px;
-  text-shadow:
-    0 0 6px var(--violet),
-    0 0 14px var(--violet),
-    0 0 22px var(--cyan);
-  text-align:center;
-}
-.tagline{
-  margin:0 0 14px; opacity:.9; font-size: 14px; text-align:center;
-}
-
-/* Rangée de bulles (8 ronds) */
-.bubbles{
-  list-style:none; padding: 10px 14px 6px; margin: 0;
-  display:flex; justify-content:center; gap: 14px; flex-wrap: wrap;
-}
-.bubble{
-  display:block; width:42px; height:42px; border-radius:50%;
-  background:#1d1d20;
-  border:2px solid rgba(255,255,255,.18);
-  box-shadow:
-    0 0 10px rgba(0,0,0,.5),
-    0 0 16px rgba(139,61,255,.25);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-.bubble:hover{
-  transform: translateY(-2px) scale(1.05);
-  border-color: var(--cyan);
-  box-shadow:
-    0 0 10px rgba(0,0,0,.6),
-    0 0 16px var(--cyan),
-    0 0 30px rgba(139,61,255,.5);
-}
-
-/* Teintes par réseau pour le halo interne */
-.bubble.twitch  { box-shadow: inset 0 0 10px #9146ff55, 0 0 16px rgba(139,61,255,.25); }
-.bubble.youtube { box-shadow: inset 0 0 10px #ff003355, 0 0 16px rgba(139,61,255,.25); }
-.bubble.insta   { box-shadow: inset 0 0 10px #ff6a3d55, 0 0 16px rgba(139,61,255,.25); }
-.bubble.tiktok  { box-shadow: inset 0 0 10px #00f2ea55, 0 0 16px rgba(139,61,255,.25); }
-.bubble.discord { box-shadow: inset 0 0 10px #5865f255, 0 0 16px rgba(139,61,255,.25); }
-.bubble.github  { box-shadow: inset 0 0 10px #9aa0a655, 0 0 16px rgba(139,61,255,.25); }
-.bubble.reddit  { box-shadow: inset 0 0 10px #ff450055, 0 0 16px rgba(139,61,255,.25); }
-.bubble.x       { box-shadow: inset 0 0 10px #cfd3d855, 0 0 16px rgba(139,61,255,.25); }
-
-/* Grosse barre blanche arrondie sous la carte */
-.underline{
-  width: min(560px, 78vw);
-  height: 6px; margin-top: 22px;
-  background: #f0f0f2; border-radius: 999px;
-  filter: drop-shadow(0 0 3px #fff);
-  opacity: .92;
-}
-
-/* --------- Responsive petits écrans --------- */
-@media (max-width: 720px){
-  .card .wing{ display:none; }
-  .card{ width:min(560px, 94vw); }
-  .underline{ width: min(460px, 86vw); }
+hr {
+    margin-top: 15px;
+    border: none;
+    height: 3px;
+    background-color: white;
+    width: 80%;
 }
