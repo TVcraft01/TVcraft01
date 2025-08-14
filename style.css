@@ -1,21 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: black;
+    padding: 0;
+    background: url('stars.gif') repeat;
+    background-size: cover;
+    font-family: 'Orbitron', sans-serif;
     color: white;
-    overflow-x: hidden;
-}
-
-.background {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-}
-.background img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    text-align: center;
 }
 
 .menu {
@@ -23,77 +15,55 @@ body {
     top: 20px;
     right: 20px;
 }
+
 .dots {
-    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    color: white;
-}
-.projects {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    background: rgba(0,0,0,0.8);
-    border: 1px solid cyan;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-.projects a {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-}
-.projects a:hover {
-    background: rgba(255,255,255,0.1);
 }
 
-.panel {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-    background: rgba(20, 0, 40, 0.8);
-    border: 2px solid cyan;
-    border-radius: 20px;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    margin: auto;
-    box-shadow: 0 0 20px cyan, 0 0 40px violet;
-}
-
-.neon-text {
-    font-size: 2.5em;
-    color: cyan;
-    text-shadow: 0 0 5px cyan, 0 0 15px cyan, 0 0 30px violet;
-}
-
-.socials {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.social-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    border: 2px solid cyan;
+.dots span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: white;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+}
+
+.title {
+    margin-top: 100px;
+    font-size: 3em;
+    color: cyan;
+    text-shadow: 0 0 10px cyan, 0 0 20px blue;
+}
+
+.links {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    box-shadow: 0 0 10px cyan, 0 0 20px violet;
-    transition: transform 0.3s;
+    gap: 20px;
 }
-.social-btn:hover {
+
+.card {
+    padding: 20px 40px;
+    border: 2px solid cyan;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px cyan;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 25px violet;
 }
-.social-btn img {
-    width: 40px;
-    height: 40px;
-}
+
+.twitch { border-color: #9146FF; box-shadow: 0 0 15px #9146FF; }
+.youtube { border-color: #FF0000; box-shadow: 0 0 15px #FF0000; }
+.tiktok { border-color: #00F2EA; box-shadow: 0 0 15px #00F2EA; }
+.discord { border-color: #5865F2; box-shadow: 0 0 15px #5865F2; }
