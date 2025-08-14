@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TVcraft01</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVcraft01</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Fond étoilé -->
-  <div class="sky">
-    <img src="etoiles.gif" alt="Fond étoilé animé">
-  </div>
-
-  <!-- Trait cyan oblique -->
-  <div class="diagonal-accent"></div>
-
-  <!-- Bouton menu (3 traits) -->
-  <button class="hamburger" id="openDrawer" aria-label="Ouvrir les projets">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- Tiroir projets -->
-  <aside class="drawer" id="drawer">
-    <div class="drawer-header">
-      <h3>Mes projets</h3>
-      <button id="closeDrawer" aria-label="Fermer">✕</button>
+    <div class="menu">
+        ☰
     </div>
-    <ul class="proj-list">
-      <li><a href="#" target="_blank">Projet 1</a></li>
-      <li><a href="#" target="_blank">Projet 2</a></li>
-      <li><a href="#" target="_blank">Projet 3</a></li>
-    </ul>
-  </aside>
-  <div class="drawer-backdrop" id="backdrop"></div>
 
-  <!-- Section centrale -->
-  <main class="hero">
+    <div class="background">
+        <img src="stars.gif" alt="étoiles" class="stars">
+    </div>
+
     <div class="card">
-      <!-- ailes gauche/droite -->
-      <div class="wing left"></div>
-      <div class="wing right"></div>
-
-      <!-- encoche + logo -->
-      <div class="logo-notch">
-        <img src="logo.png" alt="Logo TVcraft01">
-      </div>
-
-      <h1 class="title">TVcraft01</h1>
-      <p class="tagline">TVs never sleep <span class="tv">📺</span></p>
-
-      <!-- ronds de liens
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>TVcraft01</h1>
+        <p>TVs never sleep 📺</p>
+        <div class="socials">
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+            <span>⚪</span>
+        </div>
+        <hr>
+    </div>
+</body>
+</html>
