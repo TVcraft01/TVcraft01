@@ -30,7 +30,7 @@
 
 I build things because I want to understand how they work.
 
-**Minecraft · AI · Web · 3D · Linux · Automation**
+**Minecraft · 3D · Web · AI · Linux · Automation**
 
 </td>
 
@@ -44,7 +44,7 @@ I build things because I want to understand how they work.
 ├────────────────────────────┤
 │                            │
 │ SIGNAL                     │
-│ ████████████░░░░░░  BUILD  │
+│ ██████████░░░░░░░░  BUILD  │
 │                            │
 │ AI                         │
 │ DEVICES                    │
@@ -188,6 +188,10 @@ discord.gg/jguav6Js5f
 <img src="https://img.shields.io/badge/JOIN_DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord">
 </a>
 
+<a href="https://www.instagram.com/TVcraft01.exe">
+<img src="https://img.shields.io/badge/FOLLOW_ME-5865F2?style=for-the-badge&logo=instagram&logoColor=white" alt="Follow me">
+</a>
+
 <br><br>
 
 <a href="https://github.com/tvcraft01">
@@ -209,22 +213,22 @@ discord.gg/jguav6Js5f
 <br><br>
 
 ```text
-╭──────────────────────────────────────────────────╮
-│                                                  │
-│       📺 TVCRAFT01 // SYSTEM ONLINE             │
-│                                                  │
-│              TVs never sleep.                   │
-│                                                  │
-╰──────────────────────────────────────────────────╯
+╭─────────────────────────────────────────────╮
+│                                             │
+│       📺 TVCRAFT01 // SYSTEM ONLINE         │
+│                                             │
+│              TVs never sleep.               │
+│                                             │
+╰─────────────────────────────────────────────╯
 ```
 
 </div>
 
 <!--
 ╔══════════════════════════════════════════════════╗
-║ TVCRAFT01 // PROFILE SYSTEM                     ║
+║ TVCRAFT01 // PROFILE SYSTEM                      ║
 ║                                                  ║
-║ Retro-futuristic interface.                     ║
+║ Retro-futuristic interface.                      ║
 ║ TVs never sleep.                                 ║
 ╚══════════════════════════════════════════════════╝
 -->
