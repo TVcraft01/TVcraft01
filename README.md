@@ -2,59 +2,65 @@
 
 # 📺 TVcraft01
 
-### `TVs never sleep.`
-
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=18&duration=2800&pause=900&color=58A6FF&center=true&vCenter=true&width=650&lines=Booting+TVcraft01...;System+online.;Building+Nexus...;Breaking+things+to+understand+them.;Minecraft+%7C+AI+%7C+Web+%7C+3D+%7C+Linux;Signal+received." alt="Typing animation" />
-
-<br>
-
-<a href="https://github.com/tvcraft01">
-<img src="https://img.shields.io/github/followers/tvcraft01?label=FOLLOWERS&style=for-the-badge&logo=github&logoColor=white&color=181717" alt="GitHub followers">
-</a>
-<a href="https://github.com/tvcraft01?tab=repositories">
-<img src="https://img.shields.io/github/stars/tvcraft01?affiliations=OWNER%2CCOLLABORATOR&style=for-the-badge&label=STARS&logo=github&logoColor=white&color=58A6FF" alt="GitHub stars">
-</a>
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&duration=2200&pause=700&color=58A6FF&center=true&vCenter=true&width=700&lines=Booting+TVcraft01...;Initializing+system...;Checking+signal...;Signal+received.;Loading+Nexus...;Minecraft+subsystem+detected.;AI+subsystem+detected.;Experiment+mode%3A+ON;Breaking+things+to+understand+them.;TVs+never+sleep." alt="TVcraft01 boot sequence" />
 
 </div>
 
----
+<br>
+
+```text
+╔══════════════════════════════════════════════════════════════════════╗
+║                    TVCRAFT01 // SYSTEM v2.026                      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                    ║
+║  BOOT SEQUENCE                              SYSTEM STATUS           ║
+║  ─────────────                              ─────────────           ║
+║  > Initializing TVcraft01........ OK        ● ONLINE                ║
+║  > Connecting to GitHub......... OK        MODE      CREATIVE       ║
+║  > Loading projects............. OK        USER      TVCRAFT01      ║
+║  > Loading Nexus................ OK        SIGNAL    ████████ 100%  ║
+║  > Minecraft subsystem.......... OK        NETWORK   CONNECTED      ║
+║  > AI subsystem................. OK                                 ║
+║                                                                    ║
+║  ────────────────────────────────────────────────────────────────  ║
+║                                                                    ║
+║  > SYSTEM READY_                                                     ║
+║                                                                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
 
 <table>
 <tr>
-<td width="55%" valign="top">
+<td width="50%" valign="top">
 
-## 🖥️ `SYSTEM.INFO`
+### 🖥️ `USER.INFO`
 
 ```text
-╭──────────────────────────────────────╮
-│        TVCRAFT01 // TERMINAL         │
-├──────────────────────────────────────┤
-│ STATUS      : ● ONLINE               │
-│ MODE        : CREATIVE               │
-│ CURRENT     : NEXUS                  │
-│ SIGNAL      : ████████████████ 100%  │
-│                                      │
-│ > TVs never sleep_                   │
-╰──────────────────────────────────────╯
+NAME       TVcraft01
+STATUS     ONLINE
+MODE       CREATIVE
+CURRENT    Nexus
+HABITAT    Linux
 ```
 
-I'm **TVcraft01** — I build things because I want to know how they work.
+I build things because I want to understand how they work.
 
-Minecraft, AI, web, 3D, Linux, automation and whatever else catches my attention.
+**Minecraft • AI • Web • 3D • Linux • Automation**
 
 </td>
 
-<td width="45%" valign="top">
+<td width="50%" valign="top">
 
-## 📡 `CURRENT.SIGNAL`
+### 📡 `CURRENT.SIGNAL`
 
-### 🧠 Nexus
+```text
+NEXUS
+████████████░░░░░░░░
 
-**Your devices. One system.**
+STATUS: BUILDING
+```
 
-A long-term project exploring how devices, software and AI could work together as one local system.
-
-`STATUS: BUILDING`
+**Nexus** is my long-term project exploring how devices, software and AI could work together as one local system.
 
 </td>
 </tr>
@@ -62,17 +68,25 @@ A long-term project exploring how devices, software and AI could work together a
 
 ---
 
-## 🚀 `PROJECTS`
-
-<div align="center">
-
-|          🧠 Nexus         |        🧱 Minecraft       |       🔧 Open Source       |
-| :-----------------------: | :-----------------------: | :------------------------: |
-| AI · Devices · Automation | Mods · Tools · 3D · Packs | Blockbench · Contributions |
-
-</div>
-
----
+```text
+╔══════════════════════════════════════════════════════════════════════╗
+║                         PROJECT DATABASE                            ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                    ║
+║  [01] 🧠 NEXUS                                                     ║
+║       AI • DEVICES • AUTOMATION                                    ║
+║       STATUS: ████████████░░░░░░ BUILDING                         ║
+║                                                                    ║
+║  [02] 🧱 MINECRAFT                                                 ║
+║       MODS • TOOLS • 3D • PACKS                                   ║
+║       STATUS: ██████████████░░░░ ACTIVE                            ║
+║                                                                    ║
+║  [03] 🔧 OPEN SOURCE                                               ║
+║       TOOLS • CONTRIBUTIONS • EXPERIMENTS                         ║
+║       STATUS: ███████████░░░░░░ CONTRIBUTING                      ║
+║                                                                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
 
 ## 📊 `GITHUB.TELEMETRY`
 
@@ -82,52 +96,75 @@ A long-term project exploring how devices, software and AI could work together a
 
 <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tvcraft01&layout=compact&hide_border=true&theme=transparent&langs_count=6" alt="Top languages">
 
-<br>
+<br><br>
 
-<img src="https://streak-stats.demolab.com?user=tvcraft01&theme=transparent&hide_border=true" alt="Contribution streak">
+<img src="https://streak-stats.demolab.com?user=tvcraft01&theme=transparent&hide_border=true" alt="GitHub contribution streak">
 
 </div>
 
 ---
 
-## 🧰 `TOOLS`
+## 🧰 `SYSTEM.TOOLS`
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=js,html,css,nodejs,threejs,python,java,git,github,linux,vscode&perline=6" alt="Tech stack">
+<img src="https://skillicons.dev/icons?i=js,html,css,nodejs,threejs,python,java,git,github,linux,vscode&perline=6" alt="Technologies">
 
 </div>
 
 ---
 
-## 📡 `CONNECT`
+```text
+╔══════════════════════════════════════════════════════════════════════╗
+║                           NETWORK                                   ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                    ║
+║  📡 DISCORD                                                        ║
+║  https://discord.gg/jguav6Js5f                                     ║
+║                                                                    ║
+║  🐙 GITHUB                                                         ║
+║  https://github.com/tvcraft01                                      ║
+║                                                                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
 
 <div align="center">
 
 <a href="https://discord.gg/jguav6Js5f">
-<img src="https://img.shields.io/badge/Discord-JOIN%20THE%20SIGNAL-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
+<img src="https://img.shields.io/badge/DISCORD-JOIN%20THE%20SIGNAL-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord">
 </a>
 
 <a href="https://github.com/tvcraft01">
-<img src="https://img.shields.io/badge/GitHub-TVcraft01-181717?style=for-the-badge&logo=github" alt="GitHub">
+<img src="https://img.shields.io/badge/GITHUB-TVCRAFT01-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
 </a>
 
 </div>
 
----
+<br>
 
 <div align="center">
+
+<img src="https://komarev.com/ghpvc/?username=tvcraft01&style=for-the-badge&color=58A6FF&label=SIGNAL+VISITORS" alt="Profile visitors">
+
+<br><br>
 
 ```text
 ╭──────────────────────────────────────────────╮
 │                                              │
-│       📺  TVCRAFT01 // SYSTEM ONLINE         │
+│        📺 TVCRAFT01 // SYSTEM ONLINE        │
 │                                              │
-│             "TVs never sleep."               │
+│              TVs never sleep.               │
 │                                              │
 ╰──────────────────────────────────────────────╯
 ```
 
-<img src="https://komarev.com/ghpvc/?username=tvcraft01&style=for-the-badge&color=58A6FF&label=VISITORS" alt="Profile views">
-
 </div>
+
+<!--
+TVCRAFT01 // PROFILE SYSTEM
+
+This README is intentionally designed as a terminal / eDEX-inspired
+interface rather than a traditional developer profile.
+
+TVs never sleep.
+-->
