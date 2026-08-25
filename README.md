@@ -199,7 +199,7 @@ Building and contributing beyond my own repos.
 
 ---
 
-<div align="center">
+<div align="left">
   
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=1800&pause=400&color=58A6FF&center=true&vCenter=true&width=500&lines=INITIALIZING+SYSTEM...;LOADING+MODULES...;CONNECTING+TO+GITHUB...;SYSTEM+READY." alt="System loading">
 <br><br>
