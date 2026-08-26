@@ -1,7 +1,7 @@
 <div align="center">
 
 # 📺 TVcraft01
-<div align="center">
+
 
 
 
@@ -171,7 +171,7 @@ Building and contributing beyond my own repos.
 
 ### 📡 `CONNECTION`
 
-<div align="left">
+<div align="center">
 
 <br>
 
@@ -199,14 +199,12 @@ Building and contributing beyond my own repos.
 
 ---
 
-<div align="left">
+<div align="center">
   
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=1800&pause=400&color=58A6FF&center=true&vCenter=true&width=500&lines=INITIALIZING+SYSTEM...;LOADING+MODULES...;CONNECTING+TO+GITHUB...;SYSTEM+READY." alt="System loading">
 <br><br>
 
 <img src="https://komarev.com/ghpvc/?username=tvcraft01&style=for-the-badge&color=58A6FF&label=SIGNAL+VISITORS" alt="Profile visitors">
-
-
 
 <br><br>
 
