@@ -5,21 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TVCRAFT01 :: TERMINAL</title>
 <meta name="description" content="TVs never sleep. TVcraft01's link terminal.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0d10%22/><text x=%2250%22 y=%2266%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%2359e0d6%22 font-family=%22monospace%22>&gt;</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23050505%22/><text x=%2250%22 y=%2266%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23eaeaea%22 font-family=%22monospace%22>&gt;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #090c0f;
-    --panel: #0e1417;
-    --panel-2: #0b1114;
-    --line: #1c2a2e;
-    --text: #b9c7c6;
-    --text-dim: #5d7370;
-    --cyan: #59e0d6;
-    --cyan-dim: #2c7871;
-    --amber: #ffb454;
-    --red: #ff5f5f;
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --panel-2: #080808;
+    --line: #2a2a2a;
+    --fg: #eaeaea;
+    --dim: #6f6f6f;
+    --dim2: #414141;
+    --glitch-r: #ff2d55;
+    --glitch-c: #29e6ff;
     --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   }
 
@@ -28,219 +27,293 @@
   html,body{
     margin:0; padding:0; height:100%;
     background: var(--bg);
-    color: var(--text);
+    color: var(--fg);
     font-family: var(--mono);
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
-  ::selection{ background: var(--cyan-dim); color: #eafffb; }
-
+  ::selection{ background: var(--dim2); color: #fff; }
   a{ color: inherit; text-decoration: none; }
 
   /* ---------- CRT / scanline atmosphere ---------- */
   .crt{
-    pointer-events:none;
-    position:fixed; inset:0; z-index:50;
-    background:
-      repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.028) 0px,
-        rgba(255,255,255,0.028) 1px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,0,0,0) 3px
-      );
+    pointer-events:none; position:fixed; inset:0; z-index:60;
+    background: repeating-linear-gradient(to bottom,
+      rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px,
+      rgba(0,0,0,0) 2px, rgba(0,0,0,0) 3px);
     mix-blend-mode: overlay;
   }
   .vignette{
-    pointer-events:none;
-    position:fixed; inset:0; z-index:49;
-    background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events:none; position:fixed; inset:0; z-index:59;
+    background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 100%);
   }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 
-  /* ---------- boot sequence ---------- */
+  /* ---------- glitch sweep (rare, brief) ---------- */
+  .glitch-sweep{
+    pointer-events:none; position:fixed; left:0; right:0; z-index:70;
+    height: 26px; opacity:0;
+    background: var(--fg); mix-blend-mode: difference;
+  }
+  .glitch-sweep.r{ box-shadow: 0 0 0 2px var(--glitch-r) inset; }
+  .glitch-sweep.c{ box-shadow: 0 0 0 2px var(--glitch-c) inset; }
+
+  /* ---------- easter egg flash ---------- */
+  #egg{
+    position:fixed; inset:0; z-index:80;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(0,0,0,0.92);
+    color: var(--fg);
+    font-size: 15px; text-align:center; padding: 20px;
+    opacity: 0; pointer-events:none;
+    white-space: pre;
+  }
+  #egg.on{ opacity: 1; }
+  #egg .rr{ text-shadow: 1px 0 var(--glitch-r), -1px 0 var(--glitch-c); }
+
+  /* ================= BOOT ================= */
   #boot{
     position:fixed; inset:0; z-index:100;
     background: var(--bg);
-    padding: 6vh 6vw;
-    white-space: pre-wrap;
-    line-height: 1.55;
-    color: var(--cyan-dim);
-    font-size: 13px;
-    overflow: hidden;
   }
-  #boot .ok{ color: var(--cyan); }
-  #boot .warn{ color: var(--amber); }
-  #boot-cursor{
-    display:inline-block; width: 8px; height: 14px;
-    background: var(--cyan); vertical-align: -2px;
-    animation: blink 1s steps(1) infinite;
-  }
-  #boot-skip{
-    position:absolute; bottom: 5vh; left: 6vw;
-    color: var(--text-dim); font-size: 11px;
-    letter-spacing: 0.08em;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-
   body.booted #boot{ display:none; }
   body:not(.booted) #app{ display:none; }
 
-  /* ---------- app shell ---------- */
+  #boot-skip{
+    position:absolute; bottom: 5vh; left:0; right:0; text-align:center;
+    color: var(--dim2); font-size: 11px; letter-spacing: 0.08em;
+  }
+
+  .boot-center{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .boot-left{
+    position:absolute; left: 6vw; top:50%; transform:translateY(-50%);
+    text-align:left; width: min(440px, 84vw);
+  }
+
+  #globe-stage{
+    display:flex; flex-direction:column; align-items:center; gap: 18px;
+  }
+  #globe-canvas{ display:block; }
+  #globe-label{
+    font-size: 11px; letter-spacing: 0.25em; color: var(--dim);
+    text-transform: uppercase;
+  }
+  #globe-label b{ color: var(--fg); }
+
+  #logo-stage{
+    display:none; flex-direction:column; align-items:center; gap: 14px;
+  }
+  #logo-text{
+    font-size: clamp(28px, 7vw, 72px); font-weight: 800; letter-spacing: 0.06em;
+    color: var(--fg);
+  }
+  #logo-text.glitch{
+    text-shadow: 2px 0 var(--glitch-r), -2px 0 var(--glitch-c);
+  }
+  #logo-sub{
+    font-size: 12px; letter-spacing: 0.3em; color: var(--dim);
+  }
+
+  #status-stage{
+    display:none; flex-direction:column; gap: 6px;
+    font-size: 12.5px; color: var(--dim);
+  }
+  #status-stage .wink{ color: var(--fg); }
+
+  #breach-stage{
+    display:flex; flex-direction:column; gap: 3px;
+    font-size: 11px; color: var(--dim);
+    max-height: 55vh; overflow: hidden;
+  }
+  #breach-stage .brk{ color: var(--fg); }
+  #breach-stage .glitch-inline{ text-shadow: 1px 0 var(--glitch-r), -1px 0 var(--glitch-c); }
+
+  @media (max-width: 560px){
+    .boot-left{ font-size: 11px; left: 5vw; width: 90vw; }
+    #breach-stage{ font-size: 10px; }
+  }
+
+  /* ================= APP ================= */
   #app{
-    min-height: 100%;
-    display:flex; flex-direction:column;
+    min-height: 100%; display:flex; flex-direction:column;
     animation: appear .5s ease both;
   }
   @keyframes appear{ from{ opacity:0; } to{ opacity:1; } }
 
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--line);
+    padding: 10px 20px; border-bottom: 1px solid var(--line);
     background: linear-gradient(var(--panel-2), var(--bg));
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
+    font-size: 12px; letter-spacing: 0.06em; color: var(--dim);
   }
-  .topbar .brand{ color: var(--cyan); font-weight:700; }
-  .topbar .brand::before{ content:"● "; color: var(--amber); }
-  .topbar .clock{ color: var(--text); }
-  .topbar .clock b{ color: var(--cyan); font-weight:700; }
+  .topbar .brand{ color: var(--fg); font-weight:700; }
+  .topbar .brand::before{ content:"● "; color: var(--fg); }
+  .topbar .clock b{ color: var(--fg); font-weight:700; }
 
   .wrap{
-    flex:1;
-    display:grid;
-    grid-template-columns: 300px 1fr;
-    gap: 1px;
-    background: var(--line);
-    padding: 1px;
+    flex:1; display:grid; grid-template-columns: 300px 1fr;
+    gap: 1px; background: var(--line); padding: 1px;
   }
-  @media (max-width: 860px){
-    .wrap{ grid-template-columns: 1fr; }
-  }
+  @media (max-width: 860px){ .wrap{ grid-template-columns: 1fr; } }
 
-  .panel{
-    background: var(--panel);
-    padding: 22px;
-  }
+  .panel{ background: var(--panel); padding: 22px; }
   .panel-title{
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-dim);
-    margin: 0 0 16px 0;
-    display:flex; align-items:center; gap:8px;
+    color: var(--dim); margin: 0 0 16px 0; display:flex; align-items:center; gap:8px;
   }
-  .panel-title::after{
-    content:""; flex:1; height:1px; background: var(--line);
-  }
+  .panel-title::after{ content:""; flex:1; height:1px; background: var(--line); }
 
-  /* ---------- profile / side panel ---------- */
   .avatar{
-    width: 96px; height: 96px;
-    border: 1px solid var(--cyan-dim);
+    width: 96px; height: 96px; border: 1px solid var(--dim2);
     display:flex; align-items:center; justify-content:center;
-    color: var(--cyan); font-size: 34px; font-weight: 800;
-    margin-bottom: 18px;
+    color: var(--fg); font-size: 34px; font-weight: 800; margin-bottom: 18px;
     position: relative;
-    box-shadow: 0 0 24px -6px rgba(89,224,214,0.35) inset;
   }
   .avatar::before, .avatar::after{
-    content:""; position:absolute; width:10px; height:10px;
-    border: 1px solid var(--cyan-dim);
+    content:""; position:absolute; width:10px; height:10px; border: 1px solid var(--fg);
   }
   .avatar::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
   .avatar::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
 
-  .handle{ font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: 0.02em; }
-  .handle::before{ content:"@"; color: var(--text-dim); }
-  .tagline{ margin: 6px 0 20px; color: var(--text-dim); font-size: 13px; }
+  .handle{ font-size: 20px; font-weight: 800; color: var(--fg); letter-spacing: 0.02em; }
+  .handle::before{ content:"@"; color: var(--dim); }
+  .tagline{ margin: 6px 0 16px; color: var(--dim); font-size: 13px; }
+
+  .mini-globe-box{
+    border: 1px solid var(--dim2); display:flex; align-items:center; justify-content:center;
+    padding: 10px 0; margin-bottom: 18px; position:relative;
+  }
+  .mini-globe-box::after{
+    content:"UPLINK"; position:absolute; bottom: 6px; right: 10px;
+    font-size: 9px; letter-spacing: 0.18em; color: var(--dim2);
+  }
+  #mini-globe{ display:block; }
+
+  @media (max-width: 860px){
+    .mini-globe-box{
+      position: fixed; top: 54px; right: 10px; z-index: 40;
+      background: var(--bg); padding: 6px; margin: 0;
+      border-color: var(--line);
+    }
+    .mini-globe-box::after{ display:none; }
+  }
 
   .kv{ font-size: 12px; margin: 7px 0; display:flex; justify-content:space-between; gap: 10px; }
-  .kv .k{ color: var(--text-dim); }
-  .kv .v{ color: var(--text); }
-  .kv .v.on{ color: var(--cyan); }
+  .kv .k{ color: var(--dim); }
+  .kv .v{ color: var(--fg); }
 
-  .meter{
-    height: 6px; background: var(--panel-2); border: 1px solid var(--line);
-    margin: 4px 0 12px; overflow:hidden;
+  /* ticks: real, discrete, driven by hover, not decorative noise */
+  .ticks{ display:flex; gap: 3px; margin: 8px 0 16px; }
+  .ticks i{
+    flex:1; height: 8px; background: var(--panel-2); border: 1px solid var(--line);
+    display:block;
   }
-  .meter i{
-    display:block; height:100%; background: var(--cyan-dim);
-    animation: meter-shift 5.5s ease-in-out infinite;
-  }
-  .meter i.b{ animation-duration: 7s; animation-delay: -2s; }
-  .meter i.c{ animation-duration: 4.2s; animation-delay: -1s; background: var(--text-dim); }
-  @keyframes meter-shift{
-    0%{ width: 18%; } 50%{ width: 62%; } 100%{ width: 24%; }
-  }
+  .ticks i.hit{ background: var(--fg); border-color: var(--fg); }
 
   .side-foot{
     margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line);
-    font-size: 11px; color: var(--text-dim); line-height: 1.7;
+    font-size: 11px; color: var(--dim); line-height: 1.7;
   }
-  .led{ display:inline-block; width:6px; height:6px; background: var(--cyan); border-radius:50%;
-    box-shadow: 0 0 6px var(--cyan); margin-right:6px; animation: blink 2.4s steps(1) infinite; }
+  .led{
+    display:inline-block; width:6px; height:6px; background: var(--fg); border-radius:50%;
+    margin-right:6px; animation: blink 2.4s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0.15; } }
 
-  /* ---------- link list (network connections) ---------- */
   .col-heads{
-    display:grid; grid-template-columns: 28px 1fr 140px 90px 20px;
-    gap: 12px; padding: 0 14px 8px;
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-dim); border-bottom: 1px solid var(--line);
+    display:grid; grid-template-columns: 30px minmax(0,1fr) 140px 90px 20px;
+    gap: 12px; padding: 0 14px 8px; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--line);
   }
   .links{ list-style:none; margin:0; padding:0; }
   .link-row{
-    display:grid; grid-template-columns: 28px 1fr 140px 90px 20px;
-    gap: 12px; align-items:center;
-    padding: 12px 14px;
+    display:grid; grid-template-columns: 30px minmax(0,1fr) 140px 90px 20px;
+    gap: 12px; align-items:center; padding: 12px 14px;
     border-bottom: 1px solid var(--line);
-    transition: background .12s ease, padding-left .12s ease;
+    transition: background .12s ease, transform .12s ease;
   }
-  .link-row:hover, .link-row:focus-within{
-    background: rgba(89,224,214,0.06);
-    padding-left: 18px;
-  }
+  .link-row:hover, .link-row:focus-within{ background: rgba(255,255,255,0.045); transform: translateX(4px); }
   .link-row a{ display:contents; }
-  .idx{ color: var(--text-dim); font-size: 12px; }
-  .name{ display:flex; flex-direction:column; }
-  .name .n{ color: var(--text); font-weight: 700; font-size: 13.5px; }
-  .name .h{ color: var(--text-dim); font-size: 11.5px; }
-  .port{ color: var(--text-dim); font-size: 12px; }
-  .status{ font-size: 11px; color: var(--cyan); letter-spacing:0.06em; }
+  .icon{
+    width: 20px; height: 20px; color: var(--dim); opacity: 0.6;
+    transition: color .12s ease, opacity .12s ease;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon svg{ width:100%; height:100%; display:block; }
+  .icon img{ width:100%; height:100%; display:block; object-fit:contain; filter: grayscale(1) brightness(0) invert(1); }
+  .icon .icon-fallback{
+    display:none; align-items:center; justify-content:center;
+    width:100%; height:100%; font-size:9px; font-weight:700;
+    border:1px solid currentColor; letter-spacing:0.02em;
+  }
+  .link-row:hover .icon, .link-row:focus-within .icon{ color: var(--fg); opacity: 1; }
+  .name{ display:flex; flex-direction:column; min-width: 0; }
+  .name .n{ color: var(--fg); font-weight: 700; font-size: 13.5px; }
+  .name .h{
+    color: var(--dim); font-size: 11.5px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .port{ color: var(--dim); font-size: 12px; }
+  .status{ font-size: 11px; color: var(--fg); letter-spacing:0.06em; }
   .status::before{ content:"●"; margin-right:6px; font-size:8px; animation: blink 2.1s steps(1) infinite; }
-  .go{ color: var(--text-dim); font-size: 14px; transition: transform .12s ease, color .12s ease; }
-  .link-row:hover .go{ color: var(--cyan); transform: translateX(3px); }
-  .link-row:focus-within .go{ color: var(--cyan); }
-  a:focus-visible{ outline: 1px solid var(--cyan); outline-offset: -2px; }
+  .link-row:hover .status{ text-shadow: 1px 0 var(--glitch-r), -1px 0 var(--glitch-c); }
+  .go{ color: var(--dim); font-size: 14px; transition: transform .12s ease, color .12s ease; }
+  .link-row:hover .go{ color: var(--fg); transform: translateX(3px); }
+  a:focus-visible{ outline: 1px solid var(--fg); outline-offset: -2px; }
 
   .statusbar{
-    border-top: 1px solid var(--line);
-    padding: 9px 20px;
-    font-size: 11px; color: var(--text-dim);
-    display:flex; justify-content:space-between; gap: 12px;
-    letter-spacing: 0.04em;
+    border-top: 1px solid var(--line); padding: 9px 20px; font-size: 11px; color: var(--dim);
+    display:flex; justify-content:space-between; gap: 12px; letter-spacing: 0.04em;
   }
-  .statusbar .r{ color: var(--cyan-dim); }
+
+  @media (max-width: 640px){
+    .col-heads{ grid-template-columns: 26px minmax(0,1fr) 78px 18px; }
+    .link-row{ grid-template-columns: 26px minmax(0,1fr) 78px 18px; padding: 12px 10px; gap: 8px; }
+    .port{ display:none; }
+    .head-port{ display:none; }
+    .name .n{ font-size: 12.5px; }
+    .name .h{ font-size: 10.5px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="boot" aria-hidden="true">TVCRAFT01-OS [Version 1.0.0]
-<span></span><span id="boot-cursor"></span>
-<div id="boot-skip">press any key to skip</div>
+<div id="boot" aria-hidden="true">
+  <div class="boot-center">
+    <div id="globe-stage">
+      <canvas id="globe-canvas" width="260" height="260"></canvas>
+      <div id="globe-label">establishing uplink<b id="globe-pct">&nbsp;0%</b></div>
+    </div>
+    <div id="logo-stage">
+      <div id="logo-text">TVCRAFT01</div>
+      <div id="logo-sub">TVs never sleep</div>
+    </div>
+  </div>
+  <div class="boot-left">
+    <div id="breach-stage"></div>
+    <div id="status-stage"></div>
+  </div>
+  <div id="boot-skip">press any key to skip</div>
 </div>
 
 <div class="crt"></div>
 <div class="vignette"></div>
+<div class="glitch-sweep" id="sweep"></div>
+<div id="egg"></div>
 
 <div id="app">
   <div class="topbar">
     <span class="brand">TVCRAFT01_OS</span>
-    <span class="clock" id="clock"><b>--:--:--</b> UTC&plusmn;0</span>
+    <span class="clock" id="clock"><b>--:--:--</b> LOCAL</span>
   </div>
 
   <div class="wrap">
@@ -249,17 +322,20 @@
       <div class="handle">tvcraft01</div>
       <div class="tagline">TVs never sleep 📺</div>
 
-      <div class="kv"><span class="k">STATUS</span><span class="v on">ONLINE</span></div>
-      <div class="kv"><span class="k">SIGNAL</span><span class="v on">STRONG</span></div>
+      <div class="mini-globe-box">
+        <canvas id="mini-globe" width="140" height="140"></canvas>
+      </div>
+
+      <div class="kv"><span class="k">STATUS</span><span class="v">ONLINE</span></div>
       <div class="kv"><span class="k">UPTIME</span><span class="v" id="uptime">00:00:00</span></div>
 
-      <div class="panel-title" style="margin-top:20px;">SYS</div>
-      <div class="kv"><span class="k">STREAM</span><span class="v">62%</span></div>
-      <div class="meter"><i class="a"></i></div>
-      <div class="kv"><span class="k">BUILD</span><span class="v">41%</span></div>
-      <div class="meter"><i class="b"></i></div>
-      <div class="kv"><span class="k">SIGNAL</span><span class="v">18%</span></div>
-      <div class="meter"><i class="c"></i></div>
+      <div class="panel-title" style="margin-top:20px;">SCAN</div>
+      <div class="kv"><span class="k">ENDPOINTS OPENED</span><span class="v" id="scan-count">0 / 11</span></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="kv"><span class="k">PACKETS SENT</span><span class="v" id="packets">0</span></div>
+      <div class="kv" style="color:var(--dim); font-size:11px; margin-top:-2px;">
+        <span>(+1 per link opened &mdash; that's you leaving)</span>
+      </div>
 
       <div class="side-foot">
         <span class="led"></span>broadcasting on 4 platforms<br>
@@ -271,14 +347,14 @@
     <main class="panel">
       <div class="panel-title">NETWORK &mdash; ACTIVE CONNECTIONS</div>
       <div class="col-heads">
-        <span>#</span><span>NAME</span><span>HOST</span><span>STATUS</span><span></span>
+        <span></span><span>NAME</span><span class="head-port">PORT</span><span>STATUS</span><span></span>
       </div>
       <ul class="links" id="links"></ul>
     </main>
   </div>
 
   <div class="statusbar">
-    <span>TVCRAFT01_OS &mdash; static build &mdash; <span class="r">no cookies, no analytics</span></span>
+    <span>TVCRAFT01_OS &mdash; static build &mdash; <span>no cookies, no analytics</span></span>
     <span id="count">0 connections</span>
   </div>
 </div>
@@ -287,6 +363,53 @@
 (function(){
   "use strict";
 
+  /* ============================================================
+     ICONS — these load the platforms' actual logo files from an
+     /icons folder next to this HTML file (you download the real
+     SVGs from each platform's own brand/press page — see README).
+     If a file is missing, it falls back to text initials instead
+     of a broken image.
+  ============================================================ */
+  var ICON_FILES = {
+    YouTube: "youtube.svg",
+    Twitch: "twitch.svg",
+    TikTok: "tiktok.svg",
+    Instagram: "instagram.svg",
+    X: "x.svg",
+    Discord: "discord.svg",
+    GitHub: "github.svg",
+    Reddit: "reddit.svg",
+    Steam: "steam.svg",
+    Modrinth: "modrinth.svg",
+    Behance: "behance.svg"
+  };
+  function iconMarkup(name){
+    var file = ICON_FILES[name];
+    var initials = name.slice(0, 2).toUpperCase();
+    return '<img src="icons/' + file + '" alt="" loading="lazy" ' +
+      'onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
+      '<span class="icon-fallback">' + initials + '</span>';
+  }
+
+  /* flavor line for each account, shown during the boot "breach" — purely
+     cosmetic, in the same order as LINKS below */
+  var BREACH = [
+    "uploading nothing suspicious",
+    "stream key .............. redacted",
+    "algorithm ................ bypassed",
+    "filters ................... disabled",
+    "deleting old opinions",
+    "server raid .............. aborted",
+    "commit history ........... intact",
+    "karma ..................... verified",
+    "backlog ................... untouched",
+    "mods ....................... stable",
+    "portfolio .................. loading"
+  ];
+
+  /* ============================================================
+     LINKS
+  ============================================================ */
   var LINKS = [
     { name: "YouTube",   host: "youtube.com/@TVcraft01",                     url: "https://youtube.com/@TVcraft01",                     port: "443" },
     { name: "Twitch",    host: "twitch.tv/tvcraft01",                        url: "https://www.twitch.tv/tvcraft01",                    port: "443" },
@@ -302,23 +425,43 @@
   ];
 
   var list = document.getElementById("links");
+  var ticksEl = document.getElementById("ticks");
+  var scanned = new Set();
+  var packets = 0;
+
   LINKS.forEach(function(link, i){
     var li = document.createElement("li");
     li.className = "link-row";
-    var idx = String(i + 1).padStart(2, "0");
     li.innerHTML =
       '<a href="' + link.url + '" target="_blank" rel="noopener noreferrer" aria-label="' + link.name + '">' +
-        '<span class="idx">' + idx + '</span>' +
+        '<span class="icon">' + iconMarkup(link.name) + '</span>' +
         '<span class="name"><span class="n">' + link.name + '</span><span class="h">' + link.host + '</span></span>' +
         '<span class="port">:' + link.port + '</span>' +
         '<span class="status">LIVE</span>' +
         '<span class="go">&#8250;</span>' +
       '</a>';
+
+    var a = li.querySelector("a");
+    a.addEventListener("click", function(){
+      if (!scanned.has(i)) {
+        scanned.add(i);
+        document.getElementById("scan-count").textContent = scanned.size + " / " + LINKS.length;
+        var tick = ticksEl.children[i];
+        if (tick) tick.classList.add("hit");
+      }
+      packets += 1;
+      document.getElementById("packets").textContent = packets;
+    });
+
     list.appendChild(li);
+    var t = document.createElement("i");
+    ticksEl.appendChild(t);
   });
   document.getElementById("count").textContent = LINKS.length + " connections";
 
-  // ---- clock ----
+  /* ============================================================
+     CLOCK / UPTIME
+  ============================================================ */
   function pad(n){ return n < 10 ? "0" + n : "" + n; }
   var clockEl = document.getElementById("clock");
   var uptimeEl = document.getElementById("uptime");
@@ -333,24 +476,144 @@
   tick();
   setInterval(tick, 1000);
 
-  // ---- boot sequence ----
+  /* ============================================================
+     WIREFRAME GLOBE — shared renderer.
+     Used by the boot sequence AND the persistent uplink globe
+     in the side panel, so the "signature" carries onto the main page.
+  ============================================================ */
+  function drawWireframeGlobe(ctx, W, H, R, rot){
+    var cx = W / 2, cy = H / 2;
+    function project(theta, phi){
+      var x = R * Math.cos(theta) * Math.cos(phi);
+      var y = R * Math.sin(theta);
+      var z = R * Math.cos(theta) * Math.sin(phi);
+      var xr = x * Math.cos(rot) - z * Math.sin(rot);
+      var zr = x * Math.sin(rot) + z * Math.cos(rot);
+      return { x: cx + xr, y: cy - y, z: zr };
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    var meridianCount = 10;
+    var latRings = [-60, -30, 0, 30, 60];
+
+    for (var m = 0; m < meridianCount; m++){
+      var phi = (m / meridianCount) * Math.PI * 2;
+      ctx.beginPath();
+      for (var t = -90; t <= 90; t += 6){
+        var theta = t * Math.PI / 180;
+        var p = project(theta, phi);
+        var alpha = 0.15 + 0.55 * ((p.z + R) / (2 * R));
+        if (t === -90){ ctx.moveTo(p.x, p.y); }
+        else { ctx.strokeStyle = "rgba(234,234,234," + alpha.toFixed(2) + ")"; ctx.lineTo(p.x, p.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(p.x, p.y); }
+      }
+    }
+    latRings.forEach(function(latDeg){
+      var theta = latDeg * Math.PI / 180;
+      ctx.beginPath();
+      for (var pd = 0; pd <= 360; pd += 6){
+        var phi2 = pd * Math.PI / 180;
+        var p2 = project(theta, phi2);
+        var alpha2 = 0.08 + 0.3 * ((p2.z + R) / (2 * R));
+        if (pd === 0){ ctx.moveTo(p2.x, p2.y); }
+        else { ctx.strokeStyle = "rgba(234,234,234," + alpha2.toFixed(2) + ")"; ctx.lineTo(p2.x, p2.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(p2.x, p2.y); }
+      }
+    });
+  }
+
+  /* persistent uplink globe in the side panel — slow, ambient, always on,
+     and actually resizes with the viewport instead of staying a fixed 140px */
+  (function(){
+    var mini = document.getElementById("mini-globe");
+    if (!mini) return;
+    var mctx = mini.getContext("2d");
+    var mrot = 0;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function targetSize(){
+      var isMobile = window.matchMedia("(max-width: 860px)").matches;
+      return isMobile ? 72 : 140;
+    }
+    function applySize(){
+      var s = targetSize();
+      if (mini.width !== s) mini.width = s;
+      if (mini.height !== s) mini.height = s;
+    }
+    applySize();
+    drawWireframeGlobe(mctx, mini.width, mini.height, mini.width * 0.42, mrot);
+
+    if (!reduce){
+      (function miniFrame(){
+        mrot += 0.0035;
+        drawWireframeGlobe(mctx, mini.width, mini.height, mini.width * 0.42, mrot);
+        requestAnimationFrame(miniFrame);
+      })();
+    }
+
+    var resizeTimer;
+    window.addEventListener("resize", function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){
+        applySize();
+        if (reduce) drawWireframeGlobe(mctx, mini.width, mini.height, mini.width * 0.42, mrot);
+      }, 120);
+    });
+  })();
+
+  /* ============================================================
+     RARE GLITCH SWEEP + EASTER EGGS
+     Both are decoration, but neither runs on a "why is this moving"
+     loop: they fire on a random timer, once, briefly, then stop.
+  ============================================================ */
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var bootLines = [
-    "TVCRAFT01-OS [Version 1.0.0]",
-    "",
-    "[ OK ] mounting /dev/streaming ................ done",
-    "[ OK ] loading social_index.db ................ 11 endpoints",
-    "[ OK ] establishing uplink ..................... signal strong",
-    "[WARN] caffeine reserves ....................... critical",
-    "[ OK ] TVCRAFT01-OS ready.",
-    "",
-    "> initializing terminal_",
+
+  var EGGS = [
+    "you weren't supposed to see that.",
+    "¯\\_(ツ)_/¯",
+    "01010100 01010110",
+    "ctrl+F \"purpose\" -> not found",
+    "still here? uptime doesn't lie.",
+    "this terminal has no admin. just you.",
+    "reload for a different nothing."
   ];
 
+  function flashEgg(){
+    if (reduceMotion) return;
+    var el = document.getElementById("egg");
+    var msg = EGGS[Math.floor(Math.random() * EGGS.length)];
+    el.innerHTML = '<span class="rr">' + msg + '</span>';
+    el.classList.add("on");
+    setTimeout(function(){ el.classList.remove("on"); }, 90 + Math.random() * 60);
+  }
+
+  function flashSweep(){
+    if (reduceMotion) return;
+    var el = document.getElementById("sweep");
+    el.className = "glitch-sweep " + (Math.random() > 0.5 ? "r" : "c");
+    el.style.top = (Math.random() * 90) + "vh";
+    el.style.opacity = "0.5";
+    setTimeout(function(){ el.style.opacity = "0"; }, 70 + Math.random() * 50);
+  }
+
+  function scheduleAtmosphere(){
+    var delay = 14000 + Math.random() * 22000; // 14-36s, irregular on purpose
+    setTimeout(function(){
+      if (Math.random() > 0.5) flashEgg(); else flashSweep();
+      scheduleAtmosphere();
+    }, delay);
+  }
+  if (!reduceMotion) {
+    setTimeout(scheduleAtmosphere, 6000);
+  }
+
+  /* ============================================================
+     BOOT: wireframe globe -> glitch logo reveal -> status -> app
+  ============================================================ */
   var bootEl = document.getElementById("boot");
 
   function finishBoot(){
+    if (document.body.classList.contains("booted")) return;
     document.body.classList.add("booted");
+    cancelAnimationFrame(globeRAF);
     window.removeEventListener("keydown", finishBoot);
     window.removeEventListener("click", finishBoot);
   }
@@ -361,25 +624,114 @@
     window.addEventListener("keydown", finishBoot);
     window.addEventListener("click", finishBoot);
 
-    var out = bootEl.querySelector("span");
-    var full = bootLines.join("\n");
-    var i = 0;
-    var speed = 14;
+    /* ---- stage 1: rotating wireframe globe ---- */
+    var canvas = document.getElementById("globe-canvas");
+    var ctx = canvas.getContext("2d");
+    var rot = 0;
+    var globeRAF;
+    var pctEl = document.getElementById("globe-pct");
+    var globeStart = performance.now();
+    var GLOBE_DURATION = 2200;
 
-    function typeChar(){
-      if (document.body.classList.contains("booted")) return;
-      if (i <= full.length) {
-        var chunk = full.slice(0, i);
-        out.innerHTML = chunk
-          .replace(/\[ OK \]/g, '<span class="ok">[ OK ]</span>')
-          .replace(/\[WARN\]/g, '<span class="warn">[WARN]</span>');
-        i += 2;
-        setTimeout(typeChar, speed);
+    var gSize = Math.round(Math.max(140, Math.min(260, Math.min(window.innerWidth, window.innerHeight) * 0.5)));
+    canvas.width = gSize;
+    canvas.height = gSize;
+    var gRadius = gSize * 0.36;
+
+    function globeFrame(now){
+      var elapsed = now - globeStart;
+      rot += 0.018;
+      drawWireframeGlobe(ctx, canvas.width, canvas.height, gRadius, rot);
+      var pct = Math.min(100, Math.floor((elapsed / GLOBE_DURATION) * 100));
+      pctEl.textContent = " " + pct + "%";
+      if (elapsed < GLOBE_DURATION) {
+        globeRAF = requestAnimationFrame(globeFrame);
       } else {
-        setTimeout(finishBoot, 900);
+        document.getElementById("globe-stage").style.display = "none";
+        runBreachStage();
       }
     }
-    typeChar();
+    globeRAF = requestAnimationFrame(globeFrame);
+
+    /* ---- stage 2: "breaching" each connected account, one line at a time ---- */
+    function runBreachStage(){
+      var stage = document.getElementById("breach-stage");
+      stage.style.display = "flex";
+      var i = 0;
+      var deniedIndex = Math.floor(Math.random() * LINKS.length);
+      function nextBreach(){
+        if (i >= LINKS.length){ setTimeout(runStatusStage, 350); return; }
+        var link = LINKS[i];
+        var note = BREACH[i];
+        var row = document.createElement("div");
+        var isDenied = (i === deniedIndex);
+        row.innerHTML = "&gt; breaching " + link.host + " ..... " + note +
+          ' <span class="brk">' + (isDenied ? "[ACCESS DENIED]" : "[ OK ]") + "</span>";
+        stage.appendChild(row);
+        if (isDenied){
+          setTimeout(function(){
+            var brk = row.querySelector(".brk");
+            brk.textContent = "[ OK ]";
+            brk.classList.add("glitch-inline");
+            setTimeout(function(){ brk.classList.remove("glitch-inline"); }, 220);
+          }, 220);
+        }
+        i++;
+        setTimeout(nextBreach, 95);
+      }
+      nextBreach();
+    }
+
+    /* ---- stage 3: short, real status lines ---- */
+    function runStatusStage(){
+      document.getElementById("breach-stage").style.display = "none";
+      var stage = document.getElementById("status-stage");
+      stage.style.display = "flex";
+      var lines = [
+        "11 / 11 accounts linked",
+        "no login. no tracking. no ads.",
+        "initializing terminal_"
+      ];
+      var i = 0;
+      function nextLine(){
+        if (i >= lines.length){ setTimeout(runLogoStage, 450); return; }
+        var d = document.createElement("div");
+        d.innerHTML = lines[i];
+        stage.appendChild(d);
+        i++;
+        setTimeout(nextLine, 260);
+      }
+      nextLine();
+    }
+
+    /* ---- stage 4: glitch-scramble logo reveal — the finale ---- */
+    var SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#01";
+    function runLogoStage(){
+      document.getElementById("status-stage").style.display = "none";
+      var stage = document.getElementById("logo-stage");
+      stage.style.display = "flex";
+      var el = document.getElementById("logo-text");
+      var target = "TVCRAFT01";
+      el.classList.add("glitch");
+      var frame = 0;
+      var totalFrames = 22;
+      var resolveInterval = setInterval(function(){
+        frame++;
+        var out = "";
+        for (var i = 0; i < target.length; i++){
+          var revealAt = (i / target.length) * totalFrames;
+          if (frame >= revealAt + 6) out += target[i];
+          else out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+        el.textContent = out;
+        if (frame >= totalFrames + 6){
+          clearInterval(resolveInterval);
+          el.textContent = target;
+          el.classList.remove("glitch");
+          setTimeout(finishBoot, 650);
+        }
+      }, 40);
+    }
   }
 })();
 </script>
